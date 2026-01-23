@@ -28,24 +28,24 @@ void printMatrix(int arr[3][3], short rows, short cols)
     }
 }
 
-int rowSum(int arr[3][3], short rowNumber, short cols)
+int columnSum(int arr[3][3], short columnNumber, short rows)
 {
-    int sumOfRow = 0;
-    for (int j = 0; j < cols; j++)
+    int sumOfCoulmn = 0;
+    for (int i = 0; i < rows; i++)
     {
-        sumOfRow += arr[rowNumber][j];
+        sumOfCoulmn += arr[i][columnNumber];
     }
 
-    return sumOfRow;
+    return sumOfCoulmn;
 }
 
-void printEachRowSum(int arr[3][3], short rows, short cols)
+void printEachColumnSum(int arr[3][3], short rows, short cols)
 {
     cout << "The following is a 3x3 random matrix:\n";
     
-    for(short i = 0; i < rows; i++)
+    for(short j = 0; j < cols; j++)
     {
-        cout << "Row " << i + 1 << " Sum = " << rowSum(arr, i, cols);
+        cout << "Column " << j + 1 << " Sum = " << columnSum(arr, j, rows);
         cout << endl;
     }
     cout << endl;
@@ -62,7 +62,7 @@ int main()
     int arr[3][3];
     fillArrayMatrix(arr,3,3);
     printMatrix(arr,3,3);
-    printEachRowSum(arr, 3,3);
+    printEachColumnSum(arr, 3,3);
 
 
     return 0;
