@@ -22,10 +22,6 @@ namespace MyInputLibrary
     return number;
 }
 
-    int RandomNumber(int From, int To)
-    {
-        return rand() % (To - From + 1) + From;
-    }
 
     int ReadPositiveNumber(string message)
     {

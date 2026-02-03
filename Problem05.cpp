@@ -1,6 +1,6 @@
 #include <iostream>
 #include <iomanip>
-#include "HeaderFiles/MyInputLibrary.h"
+#include "HeaderFiles/RandomNumbersLibrary.h"
 
 using namespace std;
 void fillArrayMatrix(int arr[3][3], short rows, short cols)
@@ -9,7 +9,7 @@ void fillArrayMatrix(int arr[3][3], short rows, short cols)
     {
         for (int j = 0; j < cols; j++)
         {
-            arr[i][j] = MyInputLibrary::RandomNumber(1, 100);
+            arr[i][j] = RandomNumbersLibrary::RandomNumber(1, 100);
         }
     }
 }
@@ -40,16 +40,16 @@ int columnSum(int arr[3][3], short columnNumber, short rows)
 void sumEachCoulmnInArray(int arr[3][3], short rows, short cols, int sumOfCoulmn[3])
 {
 
-    for (short j = 0; j < cols; j++)
+    for (short i = 0; i < cols; i++)
     {
-        sumOfCoulmn[j] = columnSum(arr, j, rows);
+        sumOfCoulmn[i] = columnSum(arr, i, rows);
     }
 }
 
-void printCoulmnFromArray(int sumOfCoulmn[3], short rows)
+void printCoulmnFromArray(int sumOfCoulmn[3], short length)
 {
     cout << "The following is a 3x3 random matrix:\n";
-    for (int i = 0; i < rows; i++)
+    for (int i = 0; i < length; i++)
     {
         cout << "Coulmn " << i + 1 << " Sum = " << sumOfCoulmn[i] << endl;
     }

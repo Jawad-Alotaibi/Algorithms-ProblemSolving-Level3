@@ -4,7 +4,7 @@
 */
 
 #include <iostream>
-#include "HeaderFiles/MyInputLibrary.h"
+#include "HeaderFiles/RandomNumbersLibrary.h"
 #include <iomanip>
 using namespace std;
 
@@ -14,7 +14,7 @@ void fillArrayWithRandomNumbers(int arr[3][3], short rows, short cols)
     {
         for(int j = 0; j < cols; j++)
         {
-            arr[i][j] = MyInputLibrary::RandomNumber(1,100);
+            arr[i][j] = RandomNumbersLibrary::RandomNumber(1,100);
         }
     }
 }
