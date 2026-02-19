@@ -12,6 +12,7 @@ namespace MyOutputLibrary
 
 void printMatrix(int matrix[3][3], short rows, short cols)
 {
+    cout << left;
     for (int i = 0; i < rows; i++)
     {
         for (int j = 0; j < cols; j++)
@@ -74,6 +75,16 @@ void printMatrixAndAddZeros(int matrix[3][3],short rows, short cols)
         }
         cout << endl;
     }
+}
+
+void printOneDimensionalMatrix(int matrix[], short rows)
+{
+    
+    for (int i = 0; i < rows; i++)
+    {
+        cout << setw(3) << matrix[i] << " ";
+    }
+
 }
 
 }

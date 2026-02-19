@@ -6,7 +6,7 @@ namespace MyInputLibrary
     int readNumber()
 {
     int number;
-    cout << "Enter Number please\n";
+    //cout << "Enter Number please\n";
     //when the cin object read from the screen anything rather than numbers it will fail
     cin >> number;
    

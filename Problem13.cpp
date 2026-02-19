@@ -7,10 +7,16 @@ using namespace std;
 int main()
 {
     srand((unsigned)time(NULL));
-    int matrix1[3][3] = {
-        {1,1,0},
-        {0,1,0},
-        {0,0,1}
+    // int matrix1[3][3] = {
+    //     {1,0,0},
+    //     {0,1,0},
+    //     {0,0,1}
+    // };
+
+     int matrix1[3][3] = {
+        {1,4,3},
+        {4,1,2},
+        {7,8,1}
     };
     int rows = 3, cols = 3;
     
