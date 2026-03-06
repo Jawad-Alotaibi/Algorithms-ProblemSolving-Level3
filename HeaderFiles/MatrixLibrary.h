@@ -244,19 +244,17 @@ namespace MatrixLibrary
 
     bool isPalinrome(int matrix[3][3],int rows, int cols)
     {
-        int counter = 0;
         for (int i = 0; i < rows; i++)
         {
-            for (int j = 0; j < cols; j++)
+            for (int j = 0; j < cols / 2; j++) // because we will compare the first with the last then the second with the previous of the last until we reach the middle element and stop 
             {
-                if (matrix[i][0] == matrix[i][cols - 1])
-                {  
-                    counter++;
-                    break;
+                if(matrix[i][j] != matrix[i][cols - 1 - j])
+                {
+                    return false;
                 }
             }
             
         }
-        return (counter == 3);
+        return true;
     }
 }
