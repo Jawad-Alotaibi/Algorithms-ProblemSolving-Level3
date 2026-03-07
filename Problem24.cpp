@@ -3,13 +3,12 @@
 #include "HeaderFiles/MatrixLibrary.h"
 #include "HeaderFiles/MyOutputLibrary.h"
 #include "HeaderFiles/MyInputLibrary.h"
-
+#include <cctype>
 using namespace std;
 
 string readWordsFromUser()
 {
      string word;
-    cout << "Please Enter your string?\n";
     getline(cin, word);
 
     return word;
@@ -17,17 +16,20 @@ string readWordsFromUser()
    
 }
 
-void printFirstLetterOfEachWord(string word)
+void printTheWordAndCapitalizeEachFirstLetter(string word)
 {
     bool isFirstLetter = true;
-
-    for (short i = 0; i < word.length(); i++)
+    for (int i = 0; i < word.length(); i++)
     {
-        if (word[i] != ' ' && isFirstLetter)
-        {
-            cout << word[i] << endl;
-        }
-        isFirstLetter = (word[i] == ' ' ? true : false);
+      if(word[i] != ' ' && isFirstLetter)
+      {
+        cout << " ";
+        cout << (char) toupper(word[i]);
+      }
+      else
+        cout << word[i];
+
+        isFirstLetter = (word[i] == ' ' ? true : false); // ternary operator
     }
     
 }
@@ -39,8 +41,8 @@ int main()
  // loop and print each charachter from each element into that dsa
 
    
-
-    printFirstLetterOfEachWord(readWordsFromUser());
+    cout << "Please Enter your string (small letter)?\n";
+    printTheWordAndCapitalizeEachFirstLetter(readWordsFromUser());
     cout << endl;
  
     return 0;
