@@ -3,6 +3,7 @@
 #include "HeaderFiles/MatrixLibrary.h"
 #include "HeaderFiles/MyOutputLibrary.h"
 #include "HeaderFiles/MyInputLibrary.h"
+#include <string>
 #include <cctype>
 using namespace std;
 
@@ -16,14 +17,14 @@ string readWordsFromUser()
    
 }
 
-string printTheWordAndCapitalizeEachFirstLetter(string word)
+string printTheWordAndSmallEachFirstLetter(string word)
 {
     bool isFirstLetter = true;
     for (int i = 0; i < word.length(); i++)
     {
       if(word[i] != ' ' && isFirstLetter)
       {
-         word[i] = toupper(word[i]);
+         word[i] = tolower(word[i]);
       }
         isFirstLetter = (word[i] == ' ' ? true : false); // ternary operator
     }
@@ -39,9 +40,9 @@ int main()
  // loop and print each charachter from each element into that dsa
 
     
-    cout << "Please Enter your string (small letter)?\n";
+    cout << "Please Enter your string (Capital letter)?\n";
     string word = readWordsFromUser();
-    word = printTheWordAndCapitalizeEachFirstLetter(word);
+    word = printTheWordAndSmallEachFirstLetter(word);
     cout << word;
     cout << endl;
  
