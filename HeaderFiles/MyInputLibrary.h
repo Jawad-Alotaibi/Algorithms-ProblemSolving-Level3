@@ -37,6 +37,23 @@ namespace MyInputLibrary
         return number;
     }
 
+    char readChar()
+    {
+        char c1;
+        cout << "Enter a charachter\n";
+        cin >> c1;
 
+        return c1;
+    }
+
+    string readString()
+    {
+        string s1;
+        cout << "Please Enter your string? ";
+        getline(cin, s1);
+
+        return s1;
+
+    }
     
 }

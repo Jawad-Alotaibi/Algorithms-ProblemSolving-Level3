@@ -71,4 +71,56 @@ string printTheWordAndCapitalizeEachFirstLetter(string word)
     return word;
     
 }
+
+char invertLetterCase(char c1)
+{
+    return isupper(c1) ? tolower(c1) : toupper(c1); 
+}
+
+string invertLetterCase(string s1)
+{
+    for (short i = 0; i < s1.length(); i++)
+    {
+        s1[i] = invertLetterCase(s1[i]);
+    }
+
+    return s1;
+    
+}
+
+
+int stringLength(string s1)
+{
+    return s1.length();
+}
+
+int countCapitalLetters(string s1)
+{
+    int countCapitalLetters = 0;
+
+    for (int i = 0; i < s1.length(); i++)
+    {
+        if(isupper(s1[i]))
+        {
+            countCapitalLetters++;
+        }
+    }
+
+    return countCapitalLetters;
+}
+
+int countSmallLetters(string s1)
+{
+    int countSmallLetters = 0;
+
+    for (int i = 0; i < s1.length(); i++)
+    {
+        if(islower(s1[i]))
+        {
+            countSmallLetters++;
+        }
+    }
+
+    return countSmallLetters;
+}
 }
