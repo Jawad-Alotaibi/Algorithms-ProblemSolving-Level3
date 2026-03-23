@@ -3,9 +3,15 @@
 #include <iostream>
 
 using namespace std;
-
 namespace StringLibrary 
 {
+    struct stCharachterCounter
+    {
+        short smallCase = 0;
+        short capitalCase = 0;
+    };
+    
+    enum enWhatToCount {smallLetter = 0, capitalLetter =1 , all = 2, punctuation = 3};
 
     string printTheWordAndSmallEachFirstLetter(string word)
 {
@@ -123,4 +129,77 @@ int countSmallLetters(string s1)
 
     return countSmallLetters;
 }
+
+ // generic function to count the small and capital letters another solution to the previous two functions
+
+ short countLetters(string s1, enWhatToCount whatToCount = enWhatToCount::all) // if no parameter pass for the what to count enum the default is count all the letters weather capital or small
+ {
+
+    if (whatToCount == enWhatToCount::all)
+    {
+        return s1.length();
+    }
+
+    int counter = 0;
+
+    for (int i = 0; i < s1.length(); i++)
+    {
+
+        if(whatToCount == enWhatToCount::capitalLetter && isupper(s1[i]))
+        {
+            counter++;
+        }
+
+        else if(whatToCount == enWhatToCount::smallLetter && islower(s1[i]))
+        {
+            counter++;
+        }
+        
+        else if(whatToCount == enWhatToCount::punctuation && ispunct(s1[i]))
+        {
+            counter++;
+        }
+
+        }
+            return counter;
+
+    }
+
+
+    short countCharachterFrequency(string s1, char c)
+    {
+        short counter = 0;
+
+        for (short i = 0; i < s1.length(); i++)
+        {
+            //this type of iteration called Linear Search
+            if(s1[i] == c)
+            {
+                counter++;
+            }
+        }
+        if(counter == 0) return -1;
+        return counter;
+    }
+
+    stCharachterCounter countCharachterFrequencyIgnoringCaseSensetive(string s1, char c)
+    {
+        stCharachterCounter counter;
+
+        for (short i = 0; i < s1.length(); i++)
+        {
+            //this type of iteration called Linear Search
+            if(s1[i] == tolower(c))
+            {
+                counter.smallCase++;
+            }
+            if(s1[i] == toupper(c))
+            {
+                counter.capitalCase++;
+            }
+        }
+        return counter;
+    }
+
 }
+ 

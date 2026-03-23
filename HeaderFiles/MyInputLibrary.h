@@ -40,7 +40,7 @@ namespace MyInputLibrary
     char readChar()
     {
         char c1;
-        cout << "Enter a charachter\n";
+        cout << "Enter a charachter?\n";
         cin >> c1;
 
         return c1;
