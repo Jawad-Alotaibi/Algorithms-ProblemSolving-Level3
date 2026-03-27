@@ -87,4 +87,26 @@ void printOneDimensionalMatrix(int matrix[], short rows)
 
 }
 
+void printEachWordInString(string s1)
+{
+    string s2 = "";
+
+    for (short i = 0; i < s1.length(); i++)
+    {
+        if(s1[i] != ' ')
+        {
+            s2 += s1[i];
+        }
+        else
+        {
+            cout << s2 << endl;  
+            s2 = "";
+        } 
+
+    }
+
+    cout << s2 << endl;
+    
+}
+
 }

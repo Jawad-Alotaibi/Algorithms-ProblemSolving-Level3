@@ -9,9 +9,10 @@ int main()
     string s1 = MyInputLibrary::readString();    
     char charachterToCount = MyInputLibrary::readChar(); 
 
-    StringLibrary::stCharachterCounter result = StringLibrary::countCharachterFrequencyIgnoringCaseSensetive(s1, charachterToCount);
-    cout << "Letter " << "'" << charachterToCount << "'" << " Count = " << result.smallCase << endl;
-    cout << "Letter " << "'" << charachterToCount << "'" << "Or" << "'" << (char) toupper(charachterToCount) << "'" << " Count = " << result.smallCase + result.capitalCase << endl;
+    short result = StringLibrary::countCharachterFrequencyIgnoringCaseSensetive(s1, charachterToCount);
+    cout << "Letter \'" << charachterToCount << "\' Count = " << StringLibrary::countCharachterFrequencyIgnoringCaseSensetive(s1, charachterToCount);
+    cout << "Or \'" << StringLibrary::invertLetterCase(charachterToCount) << "\' ";
+    cout <<  "Count = " << StringLibrary::countCharachterFrequencyIgnoringCaseSensetive(s1, charachterToCount , false);
 
 
     return 0;

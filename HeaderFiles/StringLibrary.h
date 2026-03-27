@@ -5,11 +5,11 @@
 using namespace std;
 namespace StringLibrary 
 {
-    struct stCharachterCounter
-    {
-        short smallCase = 0;
-        short capitalCase = 0;
-    };
+    // struct stCharachterCounter
+    // {
+    //     short smallCase = 0;
+    //     short capitalCase = 0;
+    // };
     
     enum enWhatToCount {smallLetter = 0, capitalLetter =1 , all = 2, punctuation = 3};
 
@@ -32,6 +32,7 @@ namespace StringLibrary
 
 string readWordsFromUser()
 {
+    cout << "Entet Your string? ";
      string word;
     getline(cin, word);
 
@@ -182,24 +183,62 @@ int countSmallLetters(string s1)
         return counter;
     }
 
-    stCharachterCounter countCharachterFrequencyIgnoringCaseSensetive(string s1, char c)
+    short countCharachterFrequencyIgnoringCaseSensetive(string s1, char c, bool matchCase = true)
     {
-        stCharachterCounter counter;
-
+        short counter = 0;
         for (short i = 0; i < s1.length(); i++)
         {
             //this type of iteration called Linear Search
-            if(s1[i] == tolower(c))
+            if(matchCase)
             {
-                counter.smallCase++;
+                 if(s1[i] == c)
+                {
+                    counter++;
+                }
             }
-            if(s1[i] == toupper(c))
+            else 
             {
-                counter.capitalCase++;
+                if(tolower(s1[i]) == tolower(c))
+                {
+                    counter++;
+                }
             }
+           
+            
         }
         return counter;
     }
 
+bool checkIsVowel(char c)
+{
+    return (tolower(c) == 'a' || tolower(c) == 'e' || tolower(c) == 'i' || tolower(c) == 'o' || tolower(c) == 'u');
+}
+
+short countVowel(string s1)
+{
+    int counter = 0;
+
+    for (short i = 0; i < s1.length(); i++)
+    {
+        if(checkIsVowel(s1[i]))
+        {
+            counter++;
+        }
+    }
+    return counter;
+}
+
+void printVowelsInString(string s1)
+{
+
+    cout << "All vowels: ";
+    for (short i = 0; i < s1.length(); i++)
+    {
+        if(checkIsVowel(s1[i]))
+        {
+            cout << s1[i] << " ";
+        }
+    }
+}
 }
  
