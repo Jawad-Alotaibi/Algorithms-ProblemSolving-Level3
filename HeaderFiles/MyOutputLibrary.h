@@ -10,6 +10,11 @@ namespace MyOutputLibrary
     cout << "The max number is: " << max << endl;
 }
 
+void printNumber(int num, string message)
+{
+    cout << message << num << endl;
+}
+
 void printMatrix(int matrix[3][3], short rows, short cols)
 {
     cout << left;
@@ -89,24 +94,43 @@ void printOneDimensionalMatrix(int matrix[], short rows)
 
 void printEachWordInString(string s1)
 {
-    string s2 = "";
+    string delimiter = " ";
 
-    for (short i = 0; i < s1.length(); i++)
+    cout << "Your string Words are: " << endl << endl;
+
+    short pos = 0; // to know the index of the delimiter
+    string sWord = ""; // intilize it to avoid garbage value
+
+    //use the find() to get the position of the delimiters
+
+    while((pos = s1.find(delimiter)) != string::npos)
     {
-        if(s1[i] != ' ')
-        {
-            s2 += s1[i];
-        }
-        else
-        {
-            cout << s2 << endl;  
-            s2 = "";
-        } 
+        //store the word before the position 
+        sWord = s1.substr(0, pos);
 
+        if(sWord != "") //Because if there are multiple spaces, or a space at the beginning, substr() may return an empty string.
+        {
+            cout << sWord << endl;
+        }
+
+        //we need to delete or erase the string we print it out
+        s1.erase(0, pos + delimiter.length());
     }
 
-    cout << s2 << endl;
-    
+
+    if(s1 != "")
+    {
+        cout << s1 << endl;
+    }
+}
+
+void printVecotrContent(vector<string> vWords)
+{
+    cout << "\nTokens = " << vWords.size() << endl;
+    for (vector<string>::iterator itWords = vWords.begin(); itWords != vWords.end(); itWords++)
+    {
+        cout << *itWords << endl;
+    }
 }
 
 }
