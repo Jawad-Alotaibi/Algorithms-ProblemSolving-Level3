@@ -3,7 +3,8 @@
 using namespace std;
 namespace MyInputLibrary 
 {
-    int readNumber()
+    
+int readNumber()
 {
     int number;
     //cout << "Enter Number please\n";
@@ -23,9 +24,9 @@ namespace MyInputLibrary
 }
 
 
-    int ReadPositiveNumber(string message)
+    double ReadPositiveNumber(string message)
     {
-        int number = 0;
+        double number = 0;
 
     
         do
@@ -36,6 +37,8 @@ namespace MyInputLibrary
 
         return number;
     }
+
+    
 
     char readChar()
     {
@@ -55,5 +58,6 @@ namespace MyInputLibrary
         return s1;
 
     }
-    
+
+
 }

@@ -1,15 +1,14 @@
 #pragma once
 
 #include <iostream>
+#include <algorithm> // for std::erase_if
+#include <cctype>    // for std::ispunct
+
 
 using namespace std;
 namespace StringLibrary
 {
-    // struct stCharachterCounter
-    // {
-    //     short smallCase = 0;
-    //     short capitalCase = 0;
-    // };
+
 
     enum enWhatToCount
     {
@@ -340,7 +339,7 @@ namespace StringLibrary
             s1 += vString[i] + delm;
         }
 
-        return s1.substr(0, s1.length() - delm.length()); // to delete the last three delmiter
+        return s1.substr(0, s1.length() - delm.length()); // to delete the last delmiters
     }
 
     string joinString(string arr[], int length , string delm)
@@ -355,14 +354,71 @@ namespace StringLibrary
         return s1.substr(0, s1.length() - delm.length()); // to delete the last three delmiter
     }
 
-     string reverseWord(vector<string> vWords)
+    string reverseWord(vector<string> vWords)
     {
         vector<string> vReversedWords;
-        for (short i = vWords.size() - 1; i >= 0; i--)
+        vector<string>::iterator it = vWords.end(); // Declaration: ContainerType::iterator it;.
+
+        while (it != vWords.begin())
         {
-            vReversedWords.push_back(vWords[i]);
+            it--;
+            vReversedWords.push_back(*it);
         }
+        
+
         return joinString(vReversedWords, " ");
     }
+
+    string removePunction(string s1)
+    {
+        string s2 = "";
+        for (short i = 0; i < s1.length(); i++)
+        {
+            if (! ispunct(s1[i]))
+            {
+                s2 += s1[i];
+            }
+        }
+
+        return s2;
+        
+    }
+
+    string replaceWord(string original, string wordWillBeReplaced, string newWord)
+    {
+        short pos = original.find(wordWillBeReplaced);
+
+        while (pos != string::npos)
+        {
+            original.replace(pos, wordWillBeReplaced.length(), newWord);
+            pos = original.find(wordWillBeReplaced);
+        }
+        return original;
+    }
+
+     string replaceWordCustom(string original, string wordWillBeReplaced, string newWord, bool matchCase = true)
+    {
+        vector<string> vWords = splitString(original, " ");
+
+        
+        for (string &word : vWords)
+        {
+            if(matchCase)
+            {
+                if(word == wordWillBeReplaced)
+                {
+                    word = newWord;
+                }
+            } else {
+                if(LowerCaseLetter(word) == LowerCaseLetter(wordWillBeReplaced))
+                {
+                    word = newWord;
+                }
+            }
+           
+        }
+        return joinString(vWords, " ");
+    }
+
 
 }
