@@ -84,14 +84,39 @@ namespace BankLibrary
         client.pinCode = vClientData[1];
         client.name = vClientData[2];
         client.phone = vClientData[3];
-        
-        try {
+
+        try
+        {
             client.accountBalance = stod(vClientData[4]); // string to double conversion function in c++ called stod
-        } catch (const invalid_argument& e) {
+        }
+        catch (const invalid_argument &e)
+        {
             client.accountBalance = 0;
         }
 
         return client;
+    }
+
+    vector<stClient> loadClientDataFromFile()
+    {
+        fstream file;
+
+        string line = "";
+        vector<stClient> vClients;
+
+        file.open(FILENAME, ios::in);
+
+        if (file.is_open())
+        {
+            while (getline(file, line))
+            {
+                vClients.push_back(convertLineToRecord(line));
+            }
+
+            file.close();
+        }
+
+        return vClients;
     }
 
     void printClientData(stClient client)
@@ -142,24 +167,29 @@ namespace BankLibrary
         cout << "________________________________________________________________________" << endl;
     }
 
+    void printClientRecord(stClient client)
+    {
+        cout << "| " << left << setw(10) << client.accountNumber;
+        cout << "| " << left << setw(10) << client.pinCode;
+        cout << "| " << left << setw(20) << client.name;
+        cout << "| " << left << setw(10) << client.phone;
+        cout << "| " << left << setw(10) << client.accountBalance << right << setw(1) << "|";
+    }
+
     void printClientsDetails(vector<stClient> clients)
     {
 
-        cout << "| Account Number " ;
-        cout << " | Pin Code ";
-        cout  << " | Client Name ";
-        cout << " | Phone ";
-        cout << " | Balance ";
-        cout << endl << "________________________________________________________________________" << endl;
+        cout << "| Account Number";
+        cout << " | Pin Code";
+        cout << " | Client Name";
+        cout << " | Phone";
+        cout << " | Balance";
+        cout << endl
+             << "________________________________________________________________________" << endl;
 
         for (stClient &client : clients)
         {
-            cout << "| " << left << setw(10) << client.accountNumber;
-            cout << "| " << left << setw(10) << client.pinCode;
-            cout << "| " << left << setw(20) << client.name;
-            cout << "| " << left<< setw(10) << client.phone;
-            cout << "| " << left << setw(10) << client.accountBalance << right << setw(1) << "|";
-
+            printClientRecord(client);
             cout << endl;
         }
     }
@@ -170,20 +200,37 @@ namespace BankLibrary
         printClientsDetails(clients);
     }
 
-    void showAllClients()
+    // void showAllClients()
+    // {
+    //     vector<string> lines;
+    //     vector<stClient> clients;
+
+    //     // stClient client;
+    //     loadDataFromFileToVector(FILENAME, lines);
+
+    //     for (short i = 0; i < lines.size(); i++)
+    //     {
+    //         clients.push_back(convertLineToRecord(lines[i]));
+    //     }
+
+    //     printAllClients(clients);
+    // }
+
+    bool findClientByAccountNumber(string accountNumber)
     {
-        vector<string> lines;
-        vector<stClient> clients;
+        vector<stClient> vClients = loadClientDataFromFile();
 
-        // stClient client;
-        loadDataFromFileToVector(FILENAME, lines);
-
-        for (short i = 0; i < lines.size(); i++)
+        for (stClient &client : vClients)
         {
-            clients.push_back(convertLineToRecord(lines[i]));
+            if (client.accountNumber == accountNumber)
+            {
+                cout << "The following are client details" << endl
+                     << endl;
+                printClientData(client);
+                return true;
+            }
         }
-
-        printAllClients(clients);
+        cout << endl << "Client with account number (" << accountNumber << ")" << " Not Found!" << endl;
+        return false;
     }
-
 }

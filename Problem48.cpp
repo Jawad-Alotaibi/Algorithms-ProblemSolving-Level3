@@ -5,13 +5,13 @@
 #include "HeaderFiles/MyOutputLibrary.h"
 #include "HeaderFiles/BankLibrary.h"
 
-
 using namespace std;
 using namespace BankLibrary;
+using namespace MyInputLibrary;
 
 int main()
 {
-    vector<stClient> vClients = loadClientDataFromFile();
-    printAllClients(vClients);
+    findClientByAccountNumber(readString("Please Enter AccountNumber ?"));
+
     return 0;
 }

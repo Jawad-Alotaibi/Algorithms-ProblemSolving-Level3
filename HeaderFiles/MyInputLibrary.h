@@ -49,10 +49,10 @@ int readNumber()
         return c1;
     }
 
-    string readString()
+    string readString(string message)
     {
         string s1;
-        cout << "Please Enter your string? ";
+        cout << message;
         getline(cin, s1);
 
         return s1;
