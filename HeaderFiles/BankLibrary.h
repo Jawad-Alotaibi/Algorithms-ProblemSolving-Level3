@@ -10,6 +10,9 @@
 
 using namespace std;
 using namespace StringLibrary;
+using namespace FileLibrary;
+
+const string FILENAME = "clients.txt";
 
 namespace BankLibrary
 {
@@ -28,19 +31,19 @@ namespace BankLibrary
         stClient client;
 
         cout << "Enter Account Number? ";
-        getline(cin >> ws, client.accountNumber);
+        getline(cin >> ws, client.accountNumber); // cleans leftover '\n', then reads, then consumes '\n'  → buffer clean
 
         cout << "Enter PinCode? ";
-        getline(cin, client.pinCode);
+        getline(cin, client.pinCode); // reads, then consumes '\n' → buffer clean
 
         cout << "Enter Name? ";
-        getline(cin, client.name);
+        getline(cin, client.name); // reads, then consumes '\n' → buffer clean
 
         cout << "Enter Phone? ";
-        getline(cin, client.phone);
+        getline(cin, client.phone); // reads, then consumes '\n' → buffer clean
 
         cout << "Enter Account Balance? ";
-        cin >> client.accountBalance;
+        cin >> client.accountBalance; // reads value, leaves '\n' ⚠️
 
         return client;
     }
@@ -65,11 +68,28 @@ namespace BankLibrary
 
         vector<string> vClientData = splitString(line, delm);
 
+        // Validate that we have all required fields
+        if (vClientData.size() < 5)
+        {
+            // Return empty client if line is malformed
+            client.accountNumber = "";
+            client.pinCode = "";
+            client.name = "";
+            client.phone = "";
+            client.accountBalance = 0;
+            return client;
+        }
+
         client.accountNumber = vClientData[0];
         client.pinCode = vClientData[1];
         client.name = vClientData[2];
         client.phone = vClientData[3];
-        client.accountBalance = stod(vClientData[4]); // string to double conversion function in c++ called stod
+        
+        try {
+            client.accountBalance = stod(vClientData[4]); // string to double conversion function in c++ called stod
+        } catch (const invalid_argument& e) {
+            client.accountBalance = 0;
+        }
 
         return client;
     }
@@ -85,38 +105,85 @@ namespace BankLibrary
         cout << left << setw(width) << "Account Balance:" << client.accountBalance << endl;
     }
 
-    void addClientToFile(stClient client)
+    void addClientToFile(stClient client, string line)
     {
         fstream file;
         file.open(FILENAME, ios::out | ios::app);
 
-        string line = convertRecordToLine(client);
         if (file.is_open())
         {
             file << line << endl;
         }
+        file.close();
     }
 
     void addNewClient()
     {
-        char wannaAddUser = 'y';
         stClient client;
+        client = readNewClient();
+        addClientToFile(client, convertRecordToLine(client));
+    }
+    void addClients()
+    {
+        char wannaAddUser = 'y';
 
-        while (wannaAddUser == 'y' || wannaAddUser == 'Y')
+        do
         {
-            cout << "Adding New Client" << endl
-                 << endl;
-
-            client = readNewClient();
-            addClientToFile(client);
-
-            cout << "Client Added Successfully, do you want to add more clients?";
+            addNewClient();
+            cout << "\nClient Added Successfully, do you want to add more clients? Y/N? ";
             cin >> wannaAddUser;
+        } while (toupper(wannaAddUser) == 'Y');
+    }
 
-            if (! (wannaAddUser == 'y' || wannaAddUser == 'Y'))
-            {
-                break;
-            }
+    void printAllClientsHeader(int clientsNumber)
+    {
+        cout << "________________________________________________________________________" << endl;
+        cout << "\t\tClients list (" << clientsNumber << ") Client(s)." << endl;
+        cout << "________________________________________________________________________" << endl;
+    }
+
+    void printClientsDetails(vector<stClient> clients)
+    {
+
+        cout << "| Account Number " ;
+        cout << " | Pin Code ";
+        cout  << " | Client Name ";
+        cout << " | Phone ";
+        cout << " | Balance ";
+        cout << endl << "________________________________________________________________________" << endl;
+
+        for (stClient &client : clients)
+        {
+            cout << "| " << left << setw(10) << client.accountNumber;
+            cout << "| " << left << setw(10) << client.pinCode;
+            cout << "| " << left << setw(20) << client.name;
+            cout << "| " << left<< setw(10) << client.phone;
+            cout << "| " << left << setw(10) << client.accountBalance << right << setw(1) << "|";
+
+            cout << endl;
         }
     }
+
+    void printAllClients(vector<stClient> clients)
+    {
+        printAllClientsHeader(clients.size());
+        printClientsDetails(clients);
+    }
+
+    void showAllClients()
+    {
+        vector<string> lines;
+        vector<stClient> clients;
+
+        // stClient client;
+        loadDataFromFileToVector(FILENAME, lines);
+
+        for (short i = 0; i < lines.size(); i++)
+        {
+            clients.push_back(convertLineToRecord(lines[i]));
+        }
+
+        printAllClients(clients);
+    }
+
 }

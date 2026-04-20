@@ -3,12 +3,10 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-#include "BankLibrary.h"
+
 
 using namespace std;
-using namespace BankLibrary;
 
-const string FILENAME = "clients.txt";
 namespace FileLibrary
 {
     void printFileContent(string fileName)

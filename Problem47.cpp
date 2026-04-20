@@ -11,8 +11,7 @@ using namespace BankLibrary;
 
 int main()
 {
-
-   addClients();
-
+    showAllClients();
+    
     return 0;
 }
