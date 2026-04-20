@@ -216,21 +216,18 @@ namespace BankLibrary
     //     printAllClients(clients);
     // }
 
-    bool findClientByAccountNumber(string accountNumber)
+    bool findClientByAccountNumber(string accountNumber, stClient &client)
     {
         vector<stClient> vClients = loadClientDataFromFile();
 
-        for (stClient &client : vClients)
+        for (stClient &c : vClients)
         {
-            if (client.accountNumber == accountNumber)
+            if (c.accountNumber == accountNumber)
             {
-                cout << "The following are client details" << endl
-                     << endl;
-                printClientData(client);
+                client = c;
                 return true;
             }
         }
-        cout << endl << "Client with account number (" << accountNumber << ")" << " Not Found!" << endl;
         return false;
     }
 }

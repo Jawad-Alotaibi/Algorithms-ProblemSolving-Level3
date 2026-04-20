@@ -11,7 +11,16 @@ using namespace MyInputLibrary;
 
 int main()
 {
-    findClientByAccountNumber(readString("Please Enter AccountNumber ?"));
+    string accountNumber = readString("Please Enter AccountNumber ?");
+    stClient client;
+
+    if (findClientByAccountNumber(accountNumber, client))
+    {
+        cout << endl << "The following are client details" << endl << endl;
+        printClientData(client);
+    }
+    else
+        cout << endl << "Client with account number (" << accountNumber << ")" << " Not Found!" << endl;
 
     return 0;
 }
