@@ -123,6 +123,9 @@ namespace BankLibrary
     {
         int width = 18; // Adjust this number based on your longest label
 
+        cout << endl
+             << "The following are client details" << endl
+             << endl;
         cout << left << setw(width) << "Account Number:" << client.accountNumber << endl;
         cout << left << setw(width) << "Pin Code:" << client.pinCode << endl;
         cout << left << setw(width) << "Name:" << client.name << endl;
@@ -200,22 +203,6 @@ namespace BankLibrary
         printClientsDetails(clients);
     }
 
-    // void showAllClients()
-    // {
-    //     vector<string> lines;
-    //     vector<stClient> clients;
-
-    //     // stClient client;
-    //     loadDataFromFileToVector(FILENAME, lines);
-
-    //     for (short i = 0; i < lines.size(); i++)
-    //     {
-    //         clients.push_back(convertLineToRecord(lines[i]));
-    //     }
-
-    //     printAllClients(clients);
-    // }
-
     bool findClientByAccountNumber(string accountNumber, stClient &client)
     {
         vector<stClient> vClients = loadClientDataFromFile();
@@ -230,4 +217,37 @@ namespace BankLibrary
         }
         return false;
     }
+
+    void saveClientsToFile(vector<stClient> vClients)
+    {
+        fstream file;
+        file.open(FILENAME, ios::out); // Open in output mode to overwrite the file
+
+        if (file.is_open())
+        {
+            for (stClient &client : vClients)
+            {
+                file << convertRecordToLine(client) << endl;
+            }
+            file.close();
+        }
+    }
+
+    bool deleteClient(string accountNumber)
+    {
+        vector<stClient> vClients = loadClientDataFromFile();
+
+        for (int i = 0; i < vClients.size(); i++)
+        {
+            if (accountNumber == vClients[i].accountNumber)
+            {
+                vClients.erase(vClients.begin() + i); // Delete the client at index i
+                saveClientsToFile(vClients);          // Save updated list to file
+                return true;                          // Deletion successful
+            }
+        }
+        return false; // Client not found
+    }
+
+
 }
